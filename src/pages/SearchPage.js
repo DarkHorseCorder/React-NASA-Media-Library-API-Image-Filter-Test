@@ -1,4 +1,4 @@
-import {React, useState }from 'react';
+import {React, useState, useCallback}from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import { styled, alpha } from '@mui/material/styles';
@@ -15,6 +15,8 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 
 //From MUI
 const Search = styled('div')(({ theme }) => ({
@@ -80,6 +82,16 @@ function SearchPageMain () {
     const updateEndYear = e => {
         setEndYear(e.target.value);
     }
+    //init tsparticle
+    const particlesInit = useCallback(async engine => {
+        console.log(engine);
+        await loadFull(engine);
+    }, []);
+
+    const particlesLoaded = useCallback(async container => {
+        await console.log(container);
+    }, []);
+
     //before get data, check validation
     const checkValid = () => {
         if(searchquery === ""){
@@ -224,7 +236,121 @@ function SearchPageMain () {
                         ))}
                     </ImageList>
                 :
-                <>Insert Keyword Please...</>
+                <>
+                <Particles
+                    id="tsparticles"
+                    init={particlesInit}
+                    loaded={particlesLoaded}
+                    options={{
+                        background: {
+                            color: {
+                            },
+                        },
+                        fpsLimit: 60,
+                        interactivity: {
+                            events: {
+                                onClick: {
+                                    enable: true,
+                                    mode: "push",
+                                },
+                                onHover: {
+                                    enable: true,
+                                    mode: "repulse",
+                                },
+                                resize: true,
+                            },
+                            modes: {
+                                push: {
+                                    quantity: 4,
+                                },
+                                repulse: {
+                                    distance: 200,
+                                    duration: 0.4,
+                                },
+                            },
+                        },
+                        particles: {
+                            number: {
+                                value: 60,
+                                density: {
+                                    enable: false,
+                                    value_area: 800
+                                }
+                            },
+                            color: {
+                                value: "#00cc00"
+                            },
+                            shape: {
+                                type: "circle",
+                                stroke: {
+                                    width: 0,
+                                    color: "#00cc00"
+                                },
+                                polygon: {
+                                    nb_sides: 6
+                                },
+                                image: {
+                                    src: "",
+                                    width: 100,
+                                    height: 100
+                                }
+                            },
+                            opacity: {
+                                value: 0.3,
+                                random: true,
+                                anim: {
+                                    enable: false,
+                                    speed: 1,
+                                    opacity_min: 0,
+                                    sync: false
+                                }
+                            },
+                            size: {
+                                value: 39.45738208161363,
+                                random: true,
+                                anim: {
+                                    enable: true,
+                                    speed: 10,
+                                    size_min: 40,
+                                    sync: false
+                                }
+                            },
+                            line_linked: {
+                                enable: false,
+                                distance: 200,
+                                color: "#ffffff",
+                                opacity: 1,
+                                width: 2
+                            },
+                            move: {
+                                enable: true,
+                                speed: 2,
+                                direction: "none",
+                                random: false,
+                                straight: false,
+                                out_mode: "out",
+                                bounce: false,
+                                attract: {
+                                    enable: false,
+                                    rotateX: 600,
+                                    rotateY: 1200
+                                }
+                            }
+                        },
+                        detectRetina: true,
+                    }}
+                />
+                <div className='emptyScreen'>
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                >
+                    Insert keywords please...
+                </Typography>
+                </div>
+                </>
             }
         </div>
         <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>

@@ -42,3 +42,9 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.emptyScreen{
+  display: flex;
+  justify-content: center;
+  padding-top: 50vh;
+}
