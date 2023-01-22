@@ -75,9 +75,10 @@ function ShowPage (props) {
                     variant="h6"
                     noWrap
                     component="div"
+                    width="90vw"
                     sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                 >
-                    Keywords : {data.keywords.toString()}
+                    Keywords : {Array.isArray(data.keywords) ? data.keywords.toString() : data.keywords}
                 </Typography>
                 <Typography
                     variant="h6"
