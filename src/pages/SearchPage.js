@@ -90,6 +90,10 @@ function SearchPageMain () {
             enqueueSnackbar('End year can not be eailer than Start year', {variant : 'error'})
             return 0;
         }
+        else if(endYear < 0 || startYear < 0 || startYear > new Date().getFullYear() || endYear > new Date().getFullYear()){
+            enqueueSnackbar('Put Year Correctly', {variant : 'error'})
+            return 0;
+        }
         else{
             console.log("fetch data")
             runSearch();
@@ -138,7 +142,9 @@ function SearchPageMain () {
                     aria-label="open drawer"
                     sx={{ mr: 2 }}
                 >
+                    <a href='https://www.nasa.gov/'>
                     <Avatar src='http://t0.gstatic.com/images?q=tbn:ANd9GcQ9u48pu-6IB2FnnYl_H-15le_g8Dkt5d5RN-VWiWIl_-dyJdaa'/>
+                    </a>                
                 </IconButton>
                 <Typography
                     variant="h6"
@@ -153,6 +159,7 @@ function SearchPageMain () {
                     <SearchIcon />
                     </SearchIconWrapper>
                     <StyledInputBase
+                        type='number'
                         placeholder="Start Year"
                         inputProps={{ 'aria-label': 'startyear' }}
                         value={startYear}
@@ -175,6 +182,7 @@ function SearchPageMain () {
                     <SearchIcon />
                     </SearchIconWrapper>
                     <StyledInputBase
+                        type='number'
                         placeholder="End Year"
                         inputProps={{ 'aria-label': 'endyear' }}
                         value={endYear}
@@ -221,15 +229,17 @@ function SearchPageMain () {
         </div>
         <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
             <Toolbar>
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    sx={{ mr: 2 }}
-                >
-                    <Avatar src='https://media.licdn.com/dms/image/D4E35AQFYArmVX7sGVQ/profile-framedphoto-shrink_200_200/0/1672002535825?e=1674741600&v=beta&t=2iw93Sy71v3ars37eWREcy8j6EyWuK2mhrd4ZI39LF4'/>
-                </IconButton>
+                <a href='https://www.linkedin.com/in/avramenkoartem/'>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        sx={{ mr: 2 }}
+                    >
+                        <Avatar src='https://media.licdn.com/dms/image/D4E35AQFYArmVX7sGVQ/profile-framedphoto-shrink_200_200/0/1672002535825?e=1674741600&v=beta&t=2iw93Sy71v3ars37eWREcy8j6EyWuK2mhrd4ZI39LF4'/>
+                    </IconButton>
+                </a>
                 <Typography
                     variant="h6"
                     noWrap
